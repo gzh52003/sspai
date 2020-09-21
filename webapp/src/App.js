@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { Suspense, lazy, useState } from 'react';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
 import './css/App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      Hellow sspai
-    </div>
-  );
+import Home from './views/Home'
+const Mine = lazy(() => import('./views/Mine'))
+
+@withRouter
+
+class App extends React.PureComponent {
+  render() {
+    return (
+      <div className="App" >
+        <Suspense fallback={<div>loading...</div>}>
+          <Switch>
+            <Route path='/mine' component={Mine}></Route>
+            <Route path='/' component={Home} exact></Route>
+            <Route path='/notfound' render={() => <div>404</div>}></Route>
+            <Redirect to='/notfound'></Redirect>
+          </Switch>
+        </Suspense>
+      </div>
+    );
+  }
 }
 
 export default App;
