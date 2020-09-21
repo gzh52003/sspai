@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^4.2.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.20.0",
+    "antd": "^4.6.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -35,8 +34,8 @@
     ]
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.2.2",
     "@babel/plugin-proposal-decorators": "^7.10.5",
-    "antd": "^4.6.4",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^1.0.0",
     "node-sass": "^4.14.1",

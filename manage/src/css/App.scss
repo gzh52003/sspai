@@ -8,6 +8,7 @@
   height: 100%;
   width: 20%;
   min-height: 800px;
+  padding-top: 10px;
 }
 .ant-layout-content{
 
@@ -16,10 +17,12 @@
   min-height: 800px;
 }
 .logo{
-  display: block;
+  display: inline-block;
+  margin-right: 30%;
   width: 101px;
   height: 36px;
-  margin-top: 16px;
+  margin-top: 4px;
+  vertical-align: middle;
 }
 .main{
   display: flex;
@@ -51,3 +54,21 @@
     }
   }
 }
+.pic {
+ display: inline-block;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ overflow: hidden;
+ vertical-align: middle;
+ line-height: 64px;
+}
+.ant-image-img{
+  display: block;
+}
+/* .login{
+  color: aliceblue;
+  &:hover{
+    color: aqua;
+  }
+} */
