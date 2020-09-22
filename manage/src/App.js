@@ -1,9 +1,10 @@
 import React from 'react';
-import Index from './views'
+import Index from './views';
+import Login from './views/Login';
 function App(){
   return (
     <div>
-      {<Index></Index>}
+      {<Login></Login>}
     </div>
   )
 }
