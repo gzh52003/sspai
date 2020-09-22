@@ -7,6 +7,9 @@ const {formatData} = require('../utils/tools')
 
 const vcodeRouter = require('./vcode')
 const userRouter = require('./user')
+const loginRouter = require('./login')
+const regRouter = require('./reg')
+const recommendRouter = require('./recommend')
 
 // CORS跨域
 router.use(cors)
@@ -41,5 +44,14 @@ router.use('/vcode', vcodeRouter)
 
 // 用户 /api/user
 router.use('/user', userRouter)
+
+// 登录 /api/login
+router.use('/login', loginRouter)
+
+// 注册 /api/reg
+router.use('/reg', regRouter)
+
+// 推荐 /api/reommend
+router.use('/recommend',recommendRouter)
 
 module.exports = router
