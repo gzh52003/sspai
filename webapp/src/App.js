@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useState } from 'react';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
 import './css/App.scss';
+import './css/iconfont/iconfont.css'
 
 import Home from './views/Home'
 const Mine = lazy(() => import('./views/Mine'))
