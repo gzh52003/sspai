@@ -7,7 +7,7 @@ module.exports = override(
     //  添加路径别名
     addWebpackAlias({
         '@': path.resolve(__dirname, 'src'),
-        '#': path.resolve(__dirname, 'src/store'),
+        '#': path.resolve(__dirname, 'src/components'),
         '~': path.resolve(__dirname, 'src/views')
     }),
 
