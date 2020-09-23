@@ -26,7 +26,6 @@ function Home() {
             <Carousels />
             <div className="content">
                 <Tabs tabs={Tabs_tab}
-                    renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4.5} />}
                     initialPage={0}
                     tabBarBackgroundColor={"#f5f5f9"}
                     tabBarActiveTextColor={"#d71a1b"}
@@ -42,8 +41,7 @@ function Home() {
                     {
                         Tabs_tab.map(item => {
                             return (
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '246px', backgroundColor: '#fff' }} key={item.sub}>
-                                    {item.title}
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }} key={item.sub}>
                                     <Content></Content>
                                 </div>
                             )

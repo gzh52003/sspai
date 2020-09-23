@@ -1,5 +1,6 @@
 
 import React, { useState } from "react"
+import "@/css/Content.scss"
 
 
 const datas = [{
@@ -85,7 +86,7 @@ function Content() {
     const [data, changedata] = useState(datas)
     console.log(222, data)
     return (
-        <div>
+        <div className='content-main'>
             <div className="header">
                 <img src={data[0].banner} />
                 <p>

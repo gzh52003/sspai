@@ -1,0 +1,30 @@
+.content-main{
+    .header{
+        // height: 168px;
+        position: relative;
+        >img{
+            // height: 100%;
+            width: 100%;
+        }
+        >p{
+            position: absolute;
+            bottom: 0;
+            padding-left: 20px;
+            img{
+                width: 24px;
+                height: 24px;
+            }
+            span{
+                color: #fff;
+                font-size: 12px;
+                vertical-align: super;
+                margin-left: 5px;
+            }
+        }
+        >h2{
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+    }
+}
