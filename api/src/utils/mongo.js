@@ -56,17 +56,20 @@ async function removes(colName, query) { // query{_id:'5c128cdbd1233ce12c878a32'
     return result
 }
 
-// 改
-async function update(colName, query, newData) {
-    const {db, client} = await connect()
+//  改
+async function update(colName, query, newData) { // newData{$set:{price:200,qty:2}
+    const { db, client } = await connect()
 
-    if (query._id && typeof query._id === 'string') {
+    if (query._id && typeof query._id === "string") {
         query._id = ObjectId(query._id)
     }
 
-    const collection = db.collecction(colName)
-    const result = await collection.updaraMany(query, newData)
+    const collection = db.collection(colName)
+
+    const result = await collection.updateMany(query, newData)
+
     client.close()
+
     return result
 }
 
