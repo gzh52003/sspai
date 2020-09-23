@@ -1,11 +1,10 @@
 import React from 'react';
-import Index from './views';
-import Login from './views/Login';
+import Default from './views/default';
 function App(){
   return (
-    <div>
-      {<Login></Login>}
-    </div>
+    <>
+      <Default></Default>
+    </>
   )
 }
 export default App;

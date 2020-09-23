@@ -6,7 +6,7 @@ const { Header, Content, Footer, Sider } = Layout;
 import { Row, Col } from 'antd';
 const { Search } = Input;
 const { SubMenu } = Menu;
-import Home from './Home'
+import Home from './normal/home'
 import Eidt from './normal/Edit'
 import Add from './auth/Add';
 import Del from './auth/Del';
@@ -29,7 +29,7 @@ import {
 } from '@ant-design/icons';
 
 import Routes from '../Route';
-import Login from './Login';
+
 
 const suffix = (
   <AudioOutlined
@@ -39,7 +39,7 @@ const suffix = (
     }}
   />
 );
-class Index extends React.PureComponent {
+class Face extends React.PureComponent {
   state = {
 
     menu: [
@@ -164,20 +164,20 @@ class Index extends React.PureComponent {
         </Sider>
         <Content>
           <Switch>
-            <Route path="/home" component={Home}></Route>
-            <Route path="/info/collect" component={Cols}></Route>
-            <Route path="/info/subscribe" component={Sub}></Route>
-            <Route path="/info/community" component={Com}></Route>
-            <Route path="/user/edit" component={Eidt}></Route>
-            <Route path="/user/add" component={Add}></Route>
-            <Route path="/user/del" component={Del}></Route>
-            <Route path="/article/check" component={Check}></Route>
-            <Route path="/article/post" component={Post}></Route>
-            <Route path="/article/hot" component={Hot}></Route>
-            <Route path="/tsear" component={Tsear}></Route>
-            <Route path="/feedback" component={Feedback}></Route>
+            <Route path="/face/home" component={Home}></Route>
+            <Route path="/face/info/collect" component={Cols}></Route>
+            <Route path="/face/info/subscribe" component={Sub}></Route>
+            <Route path="/face/info/community" component={Com}></Route>
+            <Route path="/face/user/edit" component={Eidt}></Route>
+            <Route path="/face/user/add" component={Add}></Route>
+            <Route path="/face/user/del" component={Del}></Route>
+            <Route path="/face/article/check" component={Check}></Route>
+            <Route path="/face/article/post" component={Post}></Route>
+            <Route path="/face/article/hot" component={Hot}></Route>
+            <Route path="/face/tsear" component={Tsear}></Route>
+            <Route path="/face/feedback" component={Feedback}></Route>
             <Redirect from="/" to="/home" exact />
-            <Redirect to="/notfound" />
+            <Redirect to="/face" />
           </Switch>
         </Content>
       </div>
@@ -199,5 +199,5 @@ class Index extends React.PureComponent {
     </div>)
   }
 }
-Index = withRouter(Index);
-export default Index;
+Face = withRouter(Face);
+export default Face;

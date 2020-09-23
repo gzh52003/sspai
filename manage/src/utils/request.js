@@ -3,7 +3,7 @@ import store from '../store';
 import {message} from 'antd';
 
 const request = axios.create({
-    baseURL:'http://localhost:3000/api',
+    baseURL:'http://10.3.138.136:3002/api',
     withCredentials:true
 })
 
