@@ -25,15 +25,12 @@ router.get('/check', async (req, res) => {
 // 新密码
 router.put('/:username', async(req, res) => {
     const {username} = req.params
-    console.log(username)
     let {password} = req.body
     password = md5(password)
     let newData = {password}
     console.log(newData)
     try {
-        console.log(12345)
         await mongo.update('user', {username: username}, {$set: newData})
-        console.log(123)
         res.send(formatData({data: {username: username, ...newData}}))
     } catch (err) {
         res.send(formatData({code: 0}))

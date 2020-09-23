@@ -1,7 +1,7 @@
 
 // MongoDB 操作封装
 
-const {MongoClient, ObjectId} = require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 
 // mongodb 数据库地址
 const url = 'mongodb://localhost:27017'
@@ -10,15 +10,15 @@ const url = 'mongodb://localhost:27017'
 const dbName = 'sspai'
 
 async function connect() {
-    const client = await MongoClient.connect(url, {useUnifiedTopology: true})
+    const client = await MongoClient.connect(url, { useUnifiedTopology: true })
     const db = client.db(dbName)
     return { client, db }
 }
 
 // 增
-async function insert(colName, data){
+async function insert(colName, data) {
     // 连接数据库
-    const {db,client} = await connect()
+    const { db, client } = await connect()
     // 添加数据
     const collection = db.collection(colName)
     // 判断传入的数据是单个还是多个
@@ -75,7 +75,7 @@ async function update(colName, query, newData) { // newData{$set:{price:200,qty:
 
 // 查
 async function find(colName, query = {}, options = {}) {
-    const {db, client} = await connect()
+    const { db, client } = await connect()
     const collection = db.collection(colName)
 
     if (query._id && typeof query._id === 'string') {

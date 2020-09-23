@@ -5,6 +5,7 @@ import './css/iconfont/iconfont.css'
 
 import Home from './views/Home'
 const Mine = lazy(() => import('./views/Mine'))
+const Login = lazy(() => import('./views/Login'))
 
 @withRouter
 
@@ -15,6 +16,7 @@ class App extends React.PureComponent {
         <Suspense fallback={<div>loading...</div>}>
           <Switch>
             <Route path='/mine' component={Mine}></Route>
+            <Route path='/login' component={Login}></Route>
             <Route path='/' component={Home} exact></Route>
             <Route path='/notfound' render={() => <div>404</div>}></Route>
             <Redirect to='/notfound'></Redirect>
