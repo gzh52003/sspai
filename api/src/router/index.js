@@ -10,6 +10,7 @@ const userRouter = require('./user')
 const loginRouter = require('./login')
 const regRouter = require('./reg')
 const recommendRouter = require('./recommend')
+const forgetRouter = require('./forget')
 
 // CORS跨域
 router.use(cors)
@@ -53,5 +54,8 @@ router.use('/reg', regRouter)
 
 // 推荐 /api/reommend
 router.use('/recommend',recommendRouter)
+
+// 忘记密码 /api/forget
+router.use('/forget', forgetRouter)
 
 module.exports = router
