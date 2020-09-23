@@ -20,13 +20,14 @@ async function insert(colName, data){
     // 连接数据库
     const {db,client} = await connect()
     // 添加数据
-    const collection = db.collecction(colName)
+    const collection = db.collection(colName)
     // 判断传入的数据是单个还是多个
-    const result = await collection[Array.isArray(data) ? 'insertMany' : 'inserOne'](data)
+    const result = await collection[Array.isArray(data) ? 'insertMany' : 'insertOne'](data)
     // 关闭连接
     client.close()
     return result
 }
+
 
 // 删
 async function remove(colName, query) {
@@ -56,7 +57,7 @@ async function removes(colName, query) { // query{_id:'5c128cdbd1233ce12c878a32'
 }
 
 // 改
-async function updata(colName, query, newData) {
+async function update(colName, query, newData) {
     const {db, client} = await connect()
 
     if (query._id && typeof query._id === 'string') {
@@ -118,6 +119,6 @@ module.exports = {
     insert,
     remove,
     removes,
-    updata,
+    update,
     find
 }
