@@ -1,10 +1,25 @@
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import createSagaMiddleware from 'redux-saga'
+import React, { useReducer } from 'react'
 
-import mysaga from './saga'
-import reducer from './reducer'
+const initState = {
+    path: 'recommend'
+}
 
-const store = createStore(reducer)
+function reducer(state = initState, action) {
+    switch (action.type) {
+        case 'change':
+            return { path: action.path };
+        default:
+            throw new Error('type error');
+    }
+}
 
-export default store
+export const MyContext = React.createContext(null)
+
+export function Provider(props) {
+    const [state, dispatch] = useReducer(reducer, initState)
+    return (
+        <MyContext.Provider value={{ state, dispatch }}>
+            {props.children}
+        </MyContext.Provider>
+    )
+}

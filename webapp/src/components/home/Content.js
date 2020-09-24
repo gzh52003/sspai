@@ -1,15 +1,16 @@
 
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback, useContext } from "react"
 import { withRouter } from 'react-router-dom'
+
+import { MyContext } from "@/store"
 import "@/css/Content.scss"
 import request from "@/utils/request"
 
 function Content(props) {
-    console.log('11111', props)
     //  发起Ajax请求获取数据
     useEffect(() => {
         const getData = async () => {
-            const { data } = await request.get('/recommend')
+            const { data } = await request.get(`/${state.path}`)
             changedata(data)
             console.log('getData', data)
         }
@@ -17,27 +18,26 @@ function Content(props) {
     }, [])
 
     //  初始化数据
-    const [datas, changedata] = useState([])
+    const [data, changedata] = useState([])
+
+    const { state, dispatch } = useContext(MyContext)
+    console.log(state, dispatch)
 
     //  点击加载数据
     const addData = useCallback(() => {
         const getData = async () => {
-            const { data } = await request.get('/recommend')
-            datas.push(...data)
-            changedata(datas)
-            console.log('add', datas,)
+            const { data } = await request.get(`/${state.path}`)
+            data.push(...data)
+            changedata(data)
+            console.log('add', data,)
 
         }
         getData()
-    }, [datas])
-    console.log(22222, datas)
+    }, [data])
 
     return (
-        <>
-            {
-                console.log(33333, datas)
-            }
-            { datas.map(item => {
+        <>{console.log('data', data)}
+            { data.map(item => {
                 return (
                     <React.Fragment key={item._id}>
                         { item.corner && item.corner.name === "派早报" ?

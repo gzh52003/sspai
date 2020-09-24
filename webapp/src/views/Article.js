@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
 import Header from '#/home/Header'           //  导航栏 
 import request from '@/utils/request'
+import { MyContext } from '@/store'
 import '@/css/Article.scss'
-import Item from 'antd-mobile/lib/popover/Item'
+
 
 function Article(props) {
-    console.log(1111, props)
     const [data, changeData] = useState([])
     useEffect(() => {
         const { id } = props.match.params
         const getData = async () => {
-            const { data } = await request.get(`/recommend/${id}`)
+            const { data } = await request.get(`/${state.path}/${id}`)
             console.log("getData", data[0])
             changeData(data[0])
         }
         getData()
 
     }, [])
+    const { state, dispatch } = useContext(MyContext)
+    console.log(state, dispatch)
 
-    console.log('2222', data)
     return (
         <div className="article">
             <Header />

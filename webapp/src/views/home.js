@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Tabs } from 'antd-mobile'
 
+import { myContext } from '@/store'
 import "../css/Home.scss"
 
 import Header from '#/home/Header'           //  导航栏
@@ -8,12 +9,14 @@ import Swiper from '#/home/Swiper'           //  轮播图
 import Carousels from '#/home/Carousels'     //  右划卡片
 import Content from "#/home/Content"         //  模块内容
 import { tabsData } from '@/store/common'    //  标签页表头
+import { MyContext } from '@/store'
 
 function Home(props) {
 
     const [Tabs_tab, changetab] = useState(tabsData)
+    const { state, dispatch } = useContext(MyContext)
+
     useEffect(() => {
-        console.log("props", props)
         //  内容导航栏固定定位
         let t = null
         const tabsBar = document.querySelector('.am-tabs-tab-bar-wrap')
@@ -32,14 +35,13 @@ function Home(props) {
                     tabsContent.style.marginTop = '0'
                 }
                 t = null
-
             }, 100)
         }
     })
 
-
     return (
         <div className="Home">
+
             <Header />
             <Swiper />
             <Carousels />
@@ -55,8 +57,8 @@ function Home(props) {
                     //     border: " 1px #d71a1b solid", width: "18%", marginLeft: '2.1%'
                     // }}
                     tabBarUnderlineStyle={{ display: "none" }}
-                    onChange={(tab, index, e) => { console.log('onChange', index, tab, "this=", e) }}
-                    onTabClick={(tab, index) => { console.log('onTabClick', index, tab,) }}
+                    onChange={(tab) => { dispatch({ type: 'change', path: tab.sub }) }}
+                    onTabClick={(tab) => { dispatch({ type: 'change', path: tab.sub }) }}
                 >
                     {
                         Tabs_tab.map(item => {
