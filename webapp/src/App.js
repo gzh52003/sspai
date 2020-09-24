@@ -4,6 +4,7 @@ import './css/App.scss';
 import './css/iconfont/iconfont.css'
 
 import Home from './views/Home'
+const Article = lazy(() => import('./views/Article'))
 const Mine = lazy(() => import('./views/Mine'))
 const Login = lazy(() => import('./views/Login'))
 
@@ -15,6 +16,7 @@ class App extends React.PureComponent {
       <div className="App" >
         <Suspense fallback={<div>loading...</div>}>
           <Switch>
+            <Route path='/article/:id' component={Article}></Route>
             <Route path='/mine' component={Mine}></Route>
             <Route path='/login' component={Login}></Route>
             <Route path='/' component={Home} exact></Route>

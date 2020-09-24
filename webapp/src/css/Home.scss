@@ -1,47 +1,8 @@
 .Home{
-    .am-navbar {
-        background-color: #292525;
-        height: 50px;
-        position: sticky;
-        top: 0px;
-        z-index: 999;
-    
-        .am-navbar-left {
-            padding-left: 10px;
-    
-            img {
-                width: 68px;
-            }
-        }
-    
-        .am-icon {
-            margin-right: 26px;
-            width: 16px;
-            color: #e5e5e5;
-        }
-    
-        .icon-gengduo {
-            color: #e5e5e5;
-        }
-    
-        .am-button {
-            background: #f5f5f5;
-            font-size: 14px;
-            color: #655e5e;
-            height: 30px;
-            line-height: 30px;
-            margin-left: 20px;
-            padding: 0 12px;
-            border-radius: 24px;
-        }
-    
-        .am-navbar-right {
-            margin-right: 10px;
-        }
-    }
     .content{
         .am-tabs-default-bar{
             padding-left: 10px;
+            background-color: inherit !important;
         }
         .am-tabs-default-bar-tab{
             width: auto !important;

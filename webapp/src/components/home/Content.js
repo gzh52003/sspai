@@ -1,15 +1,17 @@
 
 import React, { useState, useEffect, useCallback } from "react"
+import { withRouter } from 'react-router-dom'
 import "@/css/Content.scss"
 import request from "@/utils/request"
 
-function Content() {
-
+function Content(props) {
+    console.log('11111', props)
     //  发起Ajax请求获取数据
     useEffect(() => {
         const getData = async () => {
             const { data } = await request.get('/recommend')
             changedata(data)
+            console.log('getData', data)
         }
         getData()
     }, [])
@@ -23,14 +25,18 @@ function Content() {
             const { data } = await request.get('/recommend')
             datas.push(...data)
             changedata(datas)
-            console.log(1111, datas,)
+            console.log('add', datas,)
 
         }
         getData()
-    }, [])
+    }, [datas])
+    console.log(22222, datas)
 
     return (
         <>
+            {
+                console.log(33333, datas)
+            }
             { datas.map(item => {
                 return (
                     <React.Fragment key={item._id}>
@@ -53,7 +59,7 @@ function Content() {
                                 <button>阅读全篇</button>
                             </div>
                             :
-                            < div className='content-main'  >
+                            < div className='content-main' onClick={() => { props.history.push(`/article/${item._id}`) }} >
                                 <div className="header"  >
                                     <img src={item.banner} />
                                     {item.author ?
@@ -71,8 +77,6 @@ function Content() {
                                     {item.title}
                                 </div>
                             </div>
-
-
                         }
                     </React.Fragment>
                 )
@@ -81,7 +85,7 @@ function Content() {
             <div className="content-more" onClick={addData}> 更多</div>
         </>
     )
-
 }
 
+Content = withRouter(Content)
 export default Content

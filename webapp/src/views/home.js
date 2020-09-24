@@ -1,43 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import { Button, NavBar, Icon, Tabs } from 'antd-mobile'
+import { Tabs } from 'antd-mobile'
 
 import "../css/Home.scss"
 
+import Header from '#/home/Header'           //  导航栏
 import Swiper from '#/home/Swiper'           //  轮播图
 import Carousels from '#/home/Carousels'     //  右划卡片
 import Content from "#/home/Content"         //  模块内容
 import { tabsData } from '@/store/common'    //  标签页表头
 
-function Home() {
+function Home(props) {
 
     const [Tabs_tab, changetab] = useState(tabsData)
     useEffect(() => {
+        console.log("props", props)
         //  内容导航栏固定定位
-        const tabs = document.querySelector('.am-tabs-tab-bar-wrap')
-        setInterval(() => {
-            if (document.documentElement.scrollTop >= 280) {
-                tabs.className = 'am-tabs-tab-bar-wrap tabs-fixed'
+        let t = null
+        const tabsBar = document.querySelector('.am-tabs-tab-bar-wrap')
+        const tabsContent = document.querySelector('.am-tabs-content-wrap')
+        document.onscroll = () => {
+            if (t !== null) {
+                return false
             }
-            else {
-                tabs.className = 'am-tabs-tab-bar-wrap'
-            }
-            console.log(document.documentElement.scrollTop)
+            t = setInterval(() => {
+                if (document.documentElement.scrollTop >= 290) {
+                    tabsBar.className = 'am-tabs-tab-bar-wrap tabs-fixed'
+                    tabsContent.style.marginTop = '45px'
+                }
+                else {
+                    tabsBar.className = 'am-tabs-tab-bar-wrap'
+                    tabsContent.style.marginTop = '0'
+                }
+                t = null
 
-        }, 1000)
+            }, 100)
+        }
     })
 
 
     return (
         <div className="Home">
-            <NavBar
-                mode="dark"
-                leftContent={<img src="img/common/icon.png" />}
-                rightContent={[
-                    <Icon key="0" type="search" />,
-                    <span className="iconfont icon-gengduo" key="1"></span>,
-                    <Button key="2">登录</Button>
-                ]}>
-            </NavBar>
+            <Header />
             <Swiper />
             <Carousels />
             <div className="content">
