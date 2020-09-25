@@ -1,7 +1,8 @@
 .mine{
     header{
-        padding: 30px;
+        padding: 30px 30px 16px;
         background-color: #fff;
+        text-align: left;
         h2{
             display: flex;
             justify-content: space-between;
@@ -21,6 +22,75 @@
                 font-size: 14px;
                 font-weight: 500;
                 line-height: 29px;
+                text-align: center;
+            }
+        }
+        h3{
+            font-size: 12px;
+            color: #8e8787;
+            span,p{
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 20px;
+                color: #292525;
+            }
+            p{   
+                letter-spacing: .05em;
+                margin-bottom: 20px;
+            }
+            b,i{
+                font-weight: normal;
+                font-style: normal;
+            }
+            b{
+                margin-right: 6px;
+            }
+            i{
+                margin-left: 8px;
+                margin-right: 6px;
+            }
+        }
+    }
+    .content{
+        .am-tabs-pane-wrap{
+            text-align: left;
+            padding: 2%;
+        h2,h3{
+                margin: 0;
+                background-color: #fff;
+                padding: 20px 16px;
+            }
+            h2{
+                font-size: 16px;
+                color: #292525;
+                height: 71px;
+                line-height: 22px;
+               
+                margin-bottom: 14px;
+            }
+            h3{
+                >p{
+                    margin: 0;
+                    margin-bottom: 30px;
+                }
+                >div{
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-left: 18px;
+                    p{
+                        font-weight: 500;
+                        margin: 0;
+                        margin-bottom: 2px;
+                        color: #292525;
+                        font-size: 12px;
+                    }
+                    b{
+                        font-size: 14px;
+                        color: #8e8787;
+                        font-weight: normal;
+                    }
+
+                }
             }
         }
     }

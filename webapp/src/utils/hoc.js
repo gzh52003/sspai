@@ -9,7 +9,7 @@ export function withUser(InnerComponent) {
     }
 
     if (!currentUser) {
-        currentUser = {}
+        currentUser = null
     }
     return function OuterComponent(props) {
         return (

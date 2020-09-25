@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Tabs } from 'antd-mobile'
 
-import { myContext } from '@/store'
 import "../css/Home.scss"
 
 import Header from '#/home/Header'           //  导航栏

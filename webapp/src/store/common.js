@@ -7,3 +7,10 @@ export const tabsData = [
     { title: '博客', key: 'software?sort=title' },
 ]
 
+export const mineTabs = [
+    { title: '概览', sub: 'overview' },
+    { title: '动态', sub: 'dynamic' },
+    { title: '文章', sub: 'article' },
+    { title: '收藏', sub: 'collection' },
+    { title: '关注', sub: 'focus' },
+]
