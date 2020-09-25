@@ -4,16 +4,16 @@ import './css/index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { HashRouter, BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import store from './store'
+// import { Provider } from 'react-redux'
+import { Provider } from './store'
 
 const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter
 ReactDOM.render(
-  // <Provider store={store}>
-  <Router>
-    <App />
-  </Router>
-  // </Provider>
+  <Provider >
+    <Router>
+      <App />
+    </Router>
+  </Provider>
   ,
   document.getElementById('root')
 );
