@@ -16,6 +16,7 @@ function reducer(state=initState,action){
             return action.user;
         case 'logout':
             localStorage.removeItem('currentUser')
+            console.log('66666')
             return {}
 
         // {type:'update_user',user}

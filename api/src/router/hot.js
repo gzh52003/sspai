@@ -13,14 +13,14 @@ router.get('/', async (req, res) => {
     sort = sort.split(',')
     if (code) {
         let reg = new RegExp(code)
-        const result = await mongo.find('recommend', { id: reg }, { skip, limit, sort })
+        const result = await mongo.find('hot', { id: reg }, { skip, limit, sort })
         res.send(formatData({ data: result }))
     } else if (title) {
         let reg = new RegExp(title)
-        const result = await mongo.find('recommend', { title: reg }, { skip, limit, sort })
+        const result = await mongo.find('hot', { title: reg }, { skip, limit, sort })
         res.send(formatData({ data: result }))
     } else {
-        const result = await mongo.find('recommend', {}, { skip, limit, sort })
+        const result = await mongo.find('hot', {}, { skip, limit, sort })
         res.send(formatData({ data: result }))
     }
 })
@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
 // 查询某个商品
 router.get('/:id', async (req, res) => {
     const { id } = req.params
-    const result = await mongo.find('recommend', { _id: id })
+    const result = await mongo.find('hot', { _id: id })
     res.send(formatData({ data: result }))
 })
 
@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const { id } = req.params
     try {
-        const result = await mongo.remove('recommend', { _id: id })
+        const result = await mongo.remove('hot', { _id: id })
         res.send(formatData({ data: result }))
     } catch {
         res.send(formatData({ data: 0 }))
@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
     let newData = {banner, title, summary, content, contentImg, author}
 
     try {
-        const result = await mongo.insert('recommend', newData)
+        const result = await mongo.insert('hot', newData)
         res.send(formatData())
     } catch {
         res.send(formatData({ code: 0 }))
@@ -63,7 +63,7 @@ router.put('/:id', async (req, res) => {
     let newData = {banner, title, summary, content, contentImg, author}
 
     try {
-        await mongo.update('recommend', {_id: id}, {$set: newData})
+        await mongo.update('hot', {_id: id}, {$set: newData})
         res.send(formatData({data: {_id: id, ...newData}}))
     } catch (err){
         res.send(formatData({code: 0}))
