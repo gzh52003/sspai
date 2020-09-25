@@ -4,7 +4,7 @@ import { Button, Divider,message } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import request from '../utils/request';
 import {checkSame,fetchData} from '../utils/tool';
-function Forget() {
+function Forget(props) {
   const checkUser = useRef();
   const checkW1 = useRef();
   const checkW2 = useRef();
@@ -18,7 +18,7 @@ function Forget() {
   })
   return (<div className="bg">
     <div className="beforEnter">
-      <h1><img src="/logo.png" /> <span>{<CloseOutlined />}</span></h1>
+      <h1><img src="/logo.png" /></h1>
       <p>  <input type="text" className="user" placeholder="请输入用户名" ref={checkUser} onBlur={async() => {
         let user = checkUser.current.value;
         if (user) {
@@ -47,7 +47,9 @@ function Forget() {
       }}>asdf</span></p>
       <Divider dashed />
       <p>
-        <Button type="link" danger>
+        <Button type="link" onClick={()=>{
+          props.history.push('/login')
+        }}danger>
           返回登陆
     </Button>
         <Button type="primary" danger ref={reset} onClick={ ()=>{

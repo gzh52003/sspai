@@ -36,3 +36,16 @@ export async function checkSame(value){
         return resultArr
     }
 }
+export async function getActiveData(data){
+    return new Promise( (res,rej)=>{
+      rej(data)
+    })
+}
+
+export async function verify(token){
+  const result =await request.get('/jwtverify',{
+      authorization:token
+    })
+    let {code} = result;
+    return code;
+}

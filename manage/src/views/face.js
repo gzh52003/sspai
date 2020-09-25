@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/App.scss';
-import { Layout, Menu, Button, Input, Image } from 'antd';
+import { Layout, Menu, Button, Input, Image, message } from 'antd';
 import { HashRouter, BrowserRouter, Route, Redirect, Switch, Link, NavLink, withRouter } from 'react-router-dom'
 const { Header, Content, Footer, Sider } = Layout;
 import { Row, Col } from 'antd';
@@ -18,6 +18,8 @@ import Post from './normal/Post';
 import Hot from './auth/Hot';
 import Tsear from './normal/Tsear';
 import Feedback from './normal/Feedback';
+import {connect} from 'react-redux';
+import {logout} from '../store/action/user';
 import {
   TwitterOutlined,
   WechatOutlined,
@@ -29,7 +31,7 @@ import {
 } from '@ant-design/icons';
 
 import Routes from '../Route';
-
+import Password from 'antd/lib/input/Password';
 
 const suffix = (
   <AudioOutlined
@@ -39,14 +41,30 @@ const suffix = (
     }}
   />
 );
+const mapStateToProps = function(state){
+  return {
+     currentUser:state.user
+  }
+}
+const mapDispatchToProps = (dispatch)=>{
+  return {
+      logout(){
+          dispatch(logout())
+      }
+  }
+}
+
 class Face extends React.PureComponent {
+  
   state = {
 
     menu: [
       ...Routes
     ],
     collapsed: false,
-    current: '/home'
+    current: '/home',
+    username: '未登录',
+    topPic:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
   }
   toggleCollapsed = () => {
     this.setState({
@@ -64,16 +82,34 @@ class Face extends React.PureComponent {
     console.log(this.props, 'p')
     this.props.history.push(path);
   }
-  login = ()=>{
-    console.log(1)
+  logout = ()=>{
+    let bool =  confirm('你确定退出登录嘛？');
+    if(bool){
+      localStorage.setItem('currentUser','');
+      localStorage.setItem('login','lyy');
+      location.reload();
+    }
   }
   componentWillMount() {
+    try{
+      let data = localStorage.getItem('currentUser')
+      data = JSON.parse(data);
+      let {username,toppic} = data
+      this.setState({
+        ...this.state,
+        username,
+        topPic:toppic
+      })
+      }catch(err){
+  
+      }
     const { pathname } = this.props.location;
     this.setState({
       current: pathname
     })
   }
   render() {
+    console.log(this.state.topPic)
     const { menu, current } = this.state;
     return (<div>
       <Header >
@@ -114,10 +150,10 @@ class Face extends React.PureComponent {
             <span className='pic'>
               <Image
                 width={40}
-                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                src={this.state.topPic}
               />
             </span>
-            <Button type="text" danger className='login' onClick={this.login}>登入</Button>
+        <Button type="text" danger className='login' onDoubleClick={this.logout}>{this.state.username}</Button>
           </Col>
         </Row>
       </Header>
@@ -198,6 +234,9 @@ class Face extends React.PureComponent {
       </div>
     </div>)
   }
+  
 }
+
+ Face = connect(mapStateToProps,mapDispatchToProps)(Face)
 Face = withRouter(Face);
 export default Face;
