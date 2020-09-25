@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"sspai.user"}],"uuid":"67be24c8d5cb4706a9b6fd659af20330"}
