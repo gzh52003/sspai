@@ -1,9 +1,9 @@
 export const tabsData = [
-    { title: '推荐', sub: 'recommend' },
-    { title: '最热', sub: 'hot' },
-    { title: '应用推荐', sub: 'hot' },
-    { title: '生活方式', sub: 'hot' },
-    { title: '效率技巧', sub: 'recommend' },
-    { title: '博客', sub: 'recommend' },
+    { title: '推荐', key: 'recommend' },
+    { title: '最热', key: 'hot' },
+    { title: '应用推荐', key: 'software' },
+    { title: '生活方式', key: 'recommend?sort=title' },
+    { title: '效率技巧', key: 'hot?sort=title' },
+    { title: '博客', key: 'software?sort=title' },
 ]
 

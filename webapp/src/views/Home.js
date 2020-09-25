@@ -48,29 +48,30 @@ function Home(props) {
             <div className="content">
                 <Tabs tabs={Tabs_tab}
                     renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4.3} />}
-                    initialPage={0}
                     tabBarBackgroundColor={"#f5f5f9"}
                     tabBarActiveTextColor={"#d71a1b"}
                     tabBarInactiveTextColor={"#8e8787"}
+                    swipeable={false}
+                    initialPage={state.path}
                     // animated={false}
                     // tabBarUnderlineStyle={{
                     //     border: " 1px #d71a1b solid", width: "18%", marginLeft: '2.1%'
                     // }}
                     tabBarUnderlineStyle={{ display: "none" }}
-                    onChange={(tab) => { dispatch({ type: 'change', path: tab.sub }) }}
-                    onTabClick={(tab) => { dispatch({ type: 'change', path: tab.sub }) }}
+                    onTabClick={(tab) => { dispatch({ type: 'change', path: tab.key }) }}
                 >
-                    {
-                        Tabs_tab.map(item => {
-                            return (
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: "wrap", backgroundColor: '#f5f5f9' }} key={item.sub}>
-                                    <Content></Content>
-                                </div>
-                            )
-                        })
-                    }
-
+                    {/* {
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: "wrap", backgroundColor: '#f5f5f9' }} >
+                            <Content></Content>
+                            {console.log("one or two")}
+                        </div>
+                    } */}
                 </Tabs>
+                {
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: "wrap", backgroundColor: '#f5f5f9' }} >
+                        <Content></Content>
+                    </div>
+                }
             </div>
             <footer>
                 <div className="footer-logo">
