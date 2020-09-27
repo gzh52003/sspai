@@ -2,7 +2,8 @@ import React, { useReducer } from 'react'
 
 const initState = {
     path: 'recommend',
-    edit:''
+    edit:'',
+    editID:''
 }
 
 function reducer(state = initState, action) {
@@ -13,6 +14,8 @@ function reducer(state = initState, action) {
         case 'initTable':
             console.log(action,'ed')
             return {...state,edit: action.edit}
+        case 'initeditID':
+            return {...state,editID:action.editID}
         default:
             throw new Error('type error');
     }

@@ -1,7 +1,6 @@
 import React, {useState,useEffect,useContext} from 'react';
 import { Table, Tag, Space ,Image,Button} from 'antd';
 import request from '../../utils/request'
-import Item from 'antd/lib/list/Item';
 import {MyContext} from '../../myContext';
 const columns = [
    {
@@ -57,9 +56,6 @@ const columns = [
 function Eidt(props){
 
     const { state, dispatch } = useContext(MyContext)
-    console.log(state,'6789')
-    const [Nowdata, changeData] = useState([state.edit])
-    
     useEffect(()=>{
         console.log(props)
         const getData = async ()=>{
@@ -79,7 +75,7 @@ function Eidt(props){
               })
             })
             dispatch({ type: 'initTable',edit:data});
-            console.log(dataArr,'sss')
+
         }
         getData();
     },[]);

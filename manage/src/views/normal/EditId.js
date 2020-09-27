@@ -1,6 +1,8 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useContext} from 'react';
 import { SmileOutlined,UploadOutlined } from '@ant-design/icons';
 import { Form, Input, DatePicker, TimePicker, Select, Cascader, InputNumber,Upload ,Button} from 'antd';
+import request from '../../utils/request';
+import {MyContext} from '../../myContext'
 const initState = {
 
 }
@@ -30,27 +32,44 @@ const onFinish = values => {
   };
 function EditId(props){
     console.log(111,props)
+    const {state,dispatch} = useContext(MyContext);
+    console.log(dispatch,'6+6')
     useEffect(()=>{
-        console.log(props.match.params.id)
-    })
+        let id =  props.match.params.id;
+        const getData =async (dispatch)=>{
+            let data = await request.get('/user/'+id).then(data=>{if(data){
+                let now = data.data[0];
+                dispatch({type:'initeditID',editID:now})
+            }}) 
+        }
+        getData(dispatch);
+
+    },[props.match.params.id])
+    console.log(state.editID.username)
    return(
          <Form {...formItemLayout}
          onFinish={onFinish}
          onFinishFailed={onFinishFailed}
-        //  ref={(el)=>{
-        //     props.form=el
-        //  }}
+     
+         initialValues={{['username']:state.editID.username}}
          >
          <Form.Item
       label="用户名"
       help="输入2-8个字符"
       hasFeedback
       name="username"
+      rules={[
+        {
+          required: true,
+         
+        },
+      ]}
     >
       <Input placeholder="你的用户名" id="username" />
     </Form.Item>
     <Form.Item
       label="性别"
+      name="gender"
       help="输入2-8个字符"
     >
         <Select allowClear id="gender" hasFeedback>
@@ -62,6 +81,7 @@ function EditId(props){
     <Form.Item
       label="年龄"
       help="输入你的年龄"
+      name="age"
     >
       <Input placeholder="你的年龄" id="age" />
     </Form.Item>
@@ -69,6 +89,7 @@ function EditId(props){
         label="生日"
         help="请选择你的出生日期"
         id="birthday"
+        name="birthday"
       >
         <DatePicker ></DatePicker>
       </Form.Item>
@@ -86,6 +107,7 @@ function EditId(props){
       <Form.Item
       label="地址"
       help="输入你的地址"
+      name="address"
     >
       <Input placeholder="你的地址" id="address" />
     </Form.Item>
