@@ -13,6 +13,7 @@ function reducer(state=initState,action){
     switch(action.type){
         case 'login':
             localStorage.setItem('currentUser',JSON.stringify(action.user))
+            console.log(111)
             return action.user;
         case 'logout':
             localStorage.removeItem('currentUser')
