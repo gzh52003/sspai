@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 
 import {List, InputItem, Button} from 'antd-mobile'
 
@@ -10,11 +10,9 @@ function Login() {
             <List className="form-box" style={{ margin: '5px 0', backgroundColor: 'white' }}>
                 <InputItem className="form-item phone-input"
                     type="phone"
-                    
                 >手机号码</InputItem>
                 <InputItem className="form-item password-input"
                     type="password"
-                    
                 >密码</InputItem>
                 <List.Item className="form-forget"
                     extra={

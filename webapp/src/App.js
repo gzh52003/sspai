@@ -7,6 +7,8 @@ import Home from './views/Home'
 const Article = lazy(() => import('./views/Article'))
 const Mine = lazy(() => import('./views/Mine'))
 const Login = lazy(() => import('./views/Login'))
+const Reg = lazy(() => import('./views/Reg'))
+const Series = lazy(() => import('./views/Series'))
 
 @withRouter
 
@@ -19,6 +21,8 @@ class App extends React.PureComponent {
             <Route path='/article/:id' component={Article}></Route>
             <Route path='/mine' component={Mine}></Route>
             <Route path='/login' component={Login}></Route>
+            <Route path='/reg' component={Reg}></Route>
+            <Route path='/series' component={Series}></Route>
             <Route path='/' component={Home} exact></Route>
             <Route path='/notfound' render={() => <div>404</div>}></Route>
             <Redirect to='/notfound'></Redirect>

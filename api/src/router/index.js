@@ -12,6 +12,8 @@ const regRouter = require('./reg')
 const recommendRouter = require('./recommend')
 const forgetRouter = require('./forget')
 const hotRouter = require('./hot')
+const upimgRouter = require('./upimg')
+const softwareRouter = require('./software')
 
 // CORS跨域
 router.use(cors)
@@ -61,5 +63,8 @@ router.use('/forget', forgetRouter)
 
 // 热门 /api/hot
 router.use('/hot', hotRouter)
+
+// 上传图片 /api/software
+router.use('/software', softwareRouter)
 
 module.exports = router

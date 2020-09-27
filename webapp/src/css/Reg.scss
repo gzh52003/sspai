@@ -1,0 +1,59 @@
+html, body{
+    background: #fff;
+}
+
+.center-middle{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.pailog-form{
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background: #fff;
+}
+
+.Reg{
+    .title-img{
+        width: 133px;
+        height: 47px;
+        margin: 0 auto;
+        padding: 40px 0;
+    }
+
+    .form-box{
+        padding: 0 20px;
+
+        .form-item {
+            margin-top: 10px;
+            background: #f5f5f5;
+            color: #292525;
+            border: 1px solid transparent;
+            font-size: 14px;
+            height: 60px;
+            box-sizing: border-box;
+        }
+
+        .form-forget .sp{
+            font-size: 14px;
+            color: #655e5e;
+        }
+
+        .am-checkbox-agree .am-checkbox-agree-label{
+            font-size: 14px;
+            color: #8e8787;
+            margin-top: 3px;
+        }
+
+    }
+    .message {
+        padding: 0 20px 30px 20px;
+        font-size: 14px;
+        line-height: normal;
+        color: #8e8787;
+    }
+}
