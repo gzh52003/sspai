@@ -8,7 +8,7 @@
     z-index: 999;
   
     .am-navbar-left {
-        padding-left: 10px;
+        padding-left: 0 10px;
   
         img {
             width: 68px;
@@ -23,6 +23,7 @@
   
     .icon-gengduo {
         color: #e5e5e5;
+        margin-right: 12px;
     }
   
     .am-button {
@@ -38,6 +39,26 @@
   
     .am-navbar-right {
         margin-right: 10px;
+        img{
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+        }
+    }
+    
+  }
+ 
+}
+.am-popover-content{
+  .am-popover-arrow{
+    right: 14px !important;
+  }
+  .am-popover-inner{
+    border: 1px solid #e5e5e5;
+    font-size: 12px;
+    color: #606266;
+    .am-popover-item-container{
+      height: 46px;
     }
   }
 }

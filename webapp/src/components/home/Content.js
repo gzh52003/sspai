@@ -7,21 +7,19 @@ import "@/css/Content.scss"
 import request from "@/utils/request"
 
 function Content(props) {
+    const { state, dispatch } = useContext(MyContext)
+
+    //  初始化数据
+    const [data, changedata] = useState([])
+
     //  发起Ajax请求获取数据
     useEffect(() => {
         const getData = async () => {
             const { data } = await request.get(`/${state.path}`)
             changedata(data)
-            console.log('getData', data)
         }
         getData()
-    }, [])
-
-    //  初始化数据
-    const [data, changedata] = useState([])
-
-    const { state, dispatch } = useContext(MyContext)
-    console.log(state, dispatch)
+    }, [state.path])
 
     //  点击加载数据
     const addData = useCallback(() => {
@@ -29,17 +27,16 @@ function Content(props) {
             const { data } = await request.get(`/${state.path}`)
             data.push(...data)
             changedata(data)
-            console.log('add', data,)
 
         }
         getData()
     }, [data])
 
     return (
-        <>{console.log('data', data)}
-            { data.map(item => {
+        <>
+            { data.map((item, index) => {
                 return (
-                    <React.Fragment key={item._id}>
+                    <React.Fragment key={index}>
                         { item.corner && item.corner.name === "派早报" ?
                             <div className="content-paper" >
                                 <header>

@@ -1,24 +1,16 @@
-import React,{useRef,useCallback, useState , useEffect,useReducer} from 'react';
+import React,{useRef,useCallback, useState , useEffect,useReducer,useContext} from 'react';
 import  '../css/beforEnter.scss';
 import { Button,Divider } from 'antd';
 import { CloseOutlined} from '@ant-design/icons';
-
-
+import userAction,{login} from '../store/action/user';
+import {connect} from 'react-redux'
 import request from '../utils/request'
+import {bindActionCreators} from 'redux'
 import   {fetchData} from '../utils/tool'
-const initState =[
-  {}
-];
-function reducer(state,action){
-  switch (action.type){
-    case 'login':
-     return ['1','2']
-    case 'logout':
-      console.log('logout')
-    default:
-      throw new Error ('type error');
-  }
-}
+import {MyContext} from '../views/hook'
+import init from '../store/saga';
+
+
 function Login( props){
   const login= useRef();
   const username= useRef();
@@ -26,19 +18,13 @@ function Login( props){
   const mdl = useRef();
   const vcode = useRef();
   const code = useRef();
-  console.log(login)
-  const [state,dispatch] = useReducer(reducer,initState);
-  const logins =  useCallback(function(){
-    const acticon = {type:'login'}
-    dispatch(action)
-  },[])
   useEffect( function(){
     fetchData(code.current)
   },[])
     return (<div className="bg">
           <div className="beforEnter">
-          <h1><img src="/logo.png" /> <span>{<CloseOutlined />}</span></h1>
-        <p><input type="text" className="user" placeholder="请输入用户名" ref={username} onBlur={async ()=>{
+          <h1><img src="/logo.png" /> </h1>
+        <p><input type="text" className="user"   placeholder="请输入用户名" ref={username} onBlur={async ()=>{
           let user = username.current.value;
           if(user == ""){
             username.current.value = '';
@@ -54,11 +40,13 @@ function Login( props){
         }}>asdf</span></p>
         <Divider dashed />
         <p>    
-    <Button type="link" danger>
+    <Button type="link" danger onClick={()=>{
+      props.history.push('/forget')
+    }}>
       忘记密码？
     </Button>
     <Button type="primary" danger className="login" ref={login} onClick={ async ()=>{
-      {logins}
+     
       let user = {
         username: username.current.value,
         password: password.current.value,
@@ -74,9 +62,11 @@ function Login( props){
        if(result.code == 1 ){
          try {
           localStorage.setItem("currentUser",JSON.stringify(result.data)) || {}
+          localStorage.setItem("login",JSON.stringify({code:"zqm"}))  || {}
+          location.reload();
          }catch(err){
           console.error('用户信息有误')
-         }
+         } 
          
        }
       }
@@ -93,5 +83,5 @@ const mapDispatchToProps = function(dispatch){
   return bindActionCreators(userAction,dispatch)
 } */
 // Login = useRef(Login)
-/* Login = connect(mapStateToProps,mapDispatchToProps)(Login); */
+let result = connect(Login);
 export default Login;

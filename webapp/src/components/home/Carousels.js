@@ -4,16 +4,8 @@ import { Carousel } from 'antd-mobile';
 import "@/css/Carousels.scss"
 
 function Swiper() {
-    const initData = ["1", "2", "3", "4", "5"]
-    // const initData = ['card_1.png', 'card_2.jpg', 'card_3.png', 'card_4.jpg']
+    const initData = ['card_1.png', 'card_2.jpg', 'card_3.png', 'card_4.jpg']
     let [data, changeData] = useState(initData)
-    useEffect(() => {
-        setTimeout(() => {
-            changeData(
-                data = ['card_1.png', 'card_2.jpg', 'card_3.png', 'card_4.jpg'],
-            );
-        }, 100);
-    }, [data])
     return (
         <div className="carousels">
             <Carousel
