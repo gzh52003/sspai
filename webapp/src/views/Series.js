@@ -21,6 +21,7 @@ function Series(){
                 </p>
                 </Card.Body>
             </Card>
+            
              <footer>
                 <div className="footer-logo">
                     <img src='img/common/icon.png' />

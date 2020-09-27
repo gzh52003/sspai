@@ -46,10 +46,10 @@ router.delete('/:id', async (req, res) => {
 // 修改数据
 router.put('/:id', async (req, res) => {
     const { id } = req.params
-    let { age, gender, phone, address, birthday } = req.body
+    let { username, age, gender, phone, address, birthday } = req.body
     // age = age.toString()
     // phone = phone.toString()
-    let newData = { age, gender, phone, address, birthday }
+    let newData = { username, age, gender, phone, address, birthday }
     try {
         await mongo.update('user', { _id: id }, { $set: newData })
         res.send(formatData({ data: { _id: id, ...newData } }))
