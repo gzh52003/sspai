@@ -8,6 +8,7 @@ const { Search } = Input;
 const { SubMenu } = Menu;
 import Home from './normal/home'
 import Eidt from './normal/Edit'
+import EidtId from './normal/EditId'
 import Add from './auth/Add';
 import Del from './auth/Del';
 import Cols from './normal/Col';
@@ -53,7 +54,7 @@ const mapDispatchToProps = (dispatch)=>{
       }
   }
 }
-
+@connect (mapStateToProps,mapDispatchToProps)
 class Face extends React.PureComponent {
   
   state = {
@@ -108,9 +109,12 @@ class Face extends React.PureComponent {
       current: pathname
     })
   }
+
   render() {
     console.log(this.state.topPic)
+
     const { menu, current } = this.state;
+    const {currentUser,logout} = this.props;
     return (<div>
       <Header >
         <Row>
@@ -204,7 +208,9 @@ class Face extends React.PureComponent {
             <Route path="/face/info/collect" component={Cols}></Route>
             <Route path="/face/info/subscribe" component={Sub}></Route>
             <Route path="/face/info/community" component={Com}></Route>
+            <Route path="/face/user/edit/:id" component={EidtId}></Route>
             <Route path="/face/user/edit" component={Eidt}></Route>
+
             <Route path="/face/user/add" component={Add}></Route>
             <Route path="/face/user/del" component={Del}></Route>
             <Route path="/face/article/check" component={Check}></Route>
@@ -237,6 +243,6 @@ class Face extends React.PureComponent {
   
 }
 
- Face = connect(mapStateToProps,mapDispatchToProps)(Face)
+ 
 Face = withRouter(Face);
 export default Face;
