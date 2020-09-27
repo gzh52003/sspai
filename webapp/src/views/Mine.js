@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import { Tabs } from 'antd-mobile'
-import Header from '#/home/Header'           //  导航栏
-import { withUser } from '@/utils/hoc'
+
+import Header from '#/home/Header'          //  导航栏
+import Footer from '#/home/Footer'          //  页尾
+import Card from '#/home/Card'
+
 import "@/css/Mine.scss"
 import { mineTabs } from '@/store/common'
+import { withUser } from '@/utils/hoc'
 
 
 
 function Mine(props) {
     const [Tabs_tab, changetab] = useState(mineTabs)
     const userData = props.currentUser
+    console.log('Mind=', userData)
     return (
         <div className='mine'>
             <Header></Header>
@@ -28,6 +33,7 @@ function Mine(props) {
             <div className="content">
                 <Tabs tabs={Tabs_tab}
                     renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}
+                    initialPage={1}
                     tabBarBackgroundColor={"#fff"}
                     tabBarActiveTextColor={"#d71a1b"}
                     tabBarInactiveTextColor={"#8e8787"}
@@ -49,26 +55,48 @@ function Mine(props) {
 
 
                     <div style={{ backgroundColor: '#f5f5f9' }} className='dynamic' >
-                        321
-                        </div>
+                        {
+                            userData.dynamic.map(item => {
+                                return (
+                                    <div className='mine_card' key={item._id}>
+                                        <div className='mine_card_top'>
+                                            <img src={userData.toppic} />
+                                            <span>{userData.username}</span>
+                                            <b>喜欢了文章</b>
+                                        </div>
+                                        <Card data={item}></Card>
+                                    </div>
+                                )
+                            })
 
-
+                        }
+                        <h4>没用更多的数据了</h4>
+                    </div>
                     <div style={{ backgroundColor: '#f5f5f9' }} className='article' >
-                        123123
-                        </div>
+                        <h4>暂无数据</h4>
+                    </div>
 
 
                     <div style={{ backgroundColor: '#f5f5f9' }} className='collection' >
-                        321321
-                        </div>
+                        {
+                            userData.Collection.map(item => {
+                                return (
+                                    <React.Fragment key={item._id}>
+                                        <Card data={item}></Card>
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+                    </div>
 
 
                     <div style={{ backgroundColor: '#f5f5f9' }} className='focus' >
-                        111111
-                        </div>
+                        <h4>暂无数据</h4>
+                    </div>
 
                 </Tabs>
             </div>
+            <Footer></Footer>
         </div>
     )
 }
