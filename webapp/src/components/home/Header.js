@@ -89,7 +89,7 @@ function Header(props) {
                                 </div>
                             </Popover>
                             :
-                            <Button onClick={() => { props.history.push("/mine") }}>登录</Button>
+                            <Button onClick={() => { props.history.push("/login") }}>登录</Button>
                     }
 
                 </React.Fragment>
