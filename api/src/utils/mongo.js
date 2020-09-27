@@ -66,6 +66,7 @@ async function update(colName, query, newData) { // newData{$set:{price:200,qty:
 
     const collection = db.collection(colName)
 
+
     const result = await collection.updateMany(query, newData)
 
     client.close()
