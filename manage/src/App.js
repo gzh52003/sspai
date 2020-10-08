@@ -1,7 +1,8 @@
-import React from 'react';
+import React from 'react';removeEventListener
 import Default from './views/default';
-import {Provider} from './views/hook';
-console.log(Provider,'sss')
+import {MyContext,Provider} from './myContext'
+import store from './store'
+
 class App extends React.Component {
   state = {
 
@@ -9,9 +10,9 @@ class App extends React.Component {
   render(){
     return (
       <div className="default">
-
+        
         <Default></Default>
-
+  
       </div>
     )
   }

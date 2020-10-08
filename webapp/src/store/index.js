@@ -1,13 +1,24 @@
 import React, { useReducer } from 'react'
 
 const initState = {
-    path: 'recommend'
+    path: 'recommend',
+    log: false
 }
 
 function reducer(state = initState, action) {
     switch (action.type) {
         case 'change':
-            return { path: action.path };
+            return {
+                ...initState,
+                path: action.path
+            }
+            break;
+        case 'showLog':
+            return {
+                ...initState,
+                log: action.show
+            }
+            break
         default:
             throw new Error('type error');
     }

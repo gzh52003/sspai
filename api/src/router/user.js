@@ -51,7 +51,12 @@ router.put('/:id', async (req, res) => {
     // phone = phone.toString()
     let newData = { username, age, gender, phone, address, birthday }
     try {
-        await mongo.update('user', { _id: id }, { $set: newData })
+        if (dynamics) {
+            await mongo.update('user', { _id: id }, { $addToSet: { dynamic: dynamics } })
+        } else {
+            await mongo.update('user', { _id: id }, { $set: newData })
+        }
+
         res.send(formatData({ data: { _id: id, ...newData } }))
     } catch (err) {
         res.send(formatData({ code: 0 }))
@@ -62,7 +67,7 @@ router.put('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     let { username, password, gender, age } = req.body
     password = md5(password)
-    console.log(username,password)
+    console.log(username, password)
     // age = age.toString()
     try {
         const result = await mongo.insert('user', { username, password, gender, age })

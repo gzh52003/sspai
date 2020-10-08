@@ -14,6 +14,7 @@ import Hot from '../views/auth/Hot';
 import Tsear from '../views/normal/Tsear';
 import Feedback from '../views/normal/Feedback';
 import React from 'react';
+import EditId from '../views/normal/EditId';
 
 import {
     HomeOutlined,
@@ -45,6 +46,7 @@ const Routes = [
          icon:<UserOutlined />,
          children:[
            {name:'用户编辑',path:'/face/user/edit',component:Eidt,icon:<EditOutlined />},
+          
            {name:'用户添加',path:'/face/user/add',component:Add,icon:<UserAddOutlined />},
            {name:'用户删除',path:'/face/user/del',component:Del,icon:<DeleteOutlined />}
          ]

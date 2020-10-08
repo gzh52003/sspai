@@ -6,7 +6,7 @@ const Login = lazy(() => import('../views/Login'));
 const Forget = lazy(() => import('../views/forget'));
 import Face from './face';
 import {getActiveData} from '../utils/tool';
-import {MyContext, Provider} from './hook';
+import {MyContext, Provider} from '../myContext';
 import store from '../store'
 
 function Default() {
@@ -38,8 +38,9 @@ function Default() {
                 <Route path="/login" component={Login} />
                 <Route path="/forget" component={Forget} />
                 <Redirect from ="/" to = "/login"></Redirect>
-                </Switch>) :<Face /> }
+                </Switch>) :<Provider><Face /> </Provider>}
             </Suspense>
+            
             
         </>
     )
