@@ -13,8 +13,10 @@ function Article(props) {
     const [data, changeData] = useState([])
     useEffect(() => {
         const { id } = props.match.params
+        console.log("id", id)
         const getData = async () => {
             // let path = state.path.slice(0, state.path.lastIndexOf('?') == -1 ? state.path.length : state.path.lastIndexOf('?'))
+            // const { data } = await request.get(`/${type}/${id}`)
             const { data } = await request.get(`/${type}/${id}`)
             changeData(data[0])
         }
@@ -22,7 +24,7 @@ function Article(props) {
 
     }, [])
     const like = useCallback(async function (data) {
-        const dynamic = { _id: data._id, title: data.title, banner: data.banner, avatar: data.author.avatar, nickname: data.author.nickname }
+        const dynamic = { _id: data._id, id: data.id, title: data.title, banner: data.banner, avatar: data.author.avatar, nickname: data.author.nickname }
 
         const { _id } = props.currentUser
         console.log("123", _id)

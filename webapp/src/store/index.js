@@ -22,10 +22,12 @@ function reducer(state = initState, action) {
             break;
         case 'login':
             localStorage.setItem('currentUser', JSON.stringify(action.currentUser))
+            console.log('index', action.currentUser)
             return {
                 ...state,
                 currentUser: action.currentUser
             }
+            break;
         default:
             throw new Error('type error');
     }

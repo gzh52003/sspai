@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Tabs } from 'antd-mobile'
 
 import Header from '#/home/Header'          //  导航栏
 import Footer from '#/home/Footer'          //  页尾
 import Card from '#/home/Card'
+import { MyContext } from '@/store'
+import request from '@/utils/request'
 
 import "@/css/Mine.scss"
 import { mineTabs } from '@/store/common'
@@ -13,8 +15,23 @@ import { withUser } from '@/utils/hoc'
 
 function Mine(props) {
     const [Tabs_tab, changetab] = useState(mineTabs)
-    const userData = props.currentUser
-    console.log('Mind=', userData)
+    const { state, dispatch } = useContext(MyContext)
+
+    const Data = props.currentUser
+    useEffect(() => {
+        const GetUser = async () => {
+            const { data } = await request.get(`/user/${Data._id}`)
+            console.log(1111, data[0])
+
+            dispatch({ type: "login", currentUser: data[0] })
+
+        }
+        GetUser()
+    }, [])
+    const userData = Object.keys(state.currentUser).length == 0 ? props.currentUser : state.currentUser
+    // const userData = props.currentUser
+    console.log(123, state)
+    console.log(456, Object.keys(state.currentUser).length == 0)
     return (
         <div className='mine'>
             <Header></Header>

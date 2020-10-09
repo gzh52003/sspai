@@ -5,7 +5,7 @@ function Card(props) {
     const data = props.data
     const type = data.banner.split('/')[1]
     return (
-        < div className='content-main' onClick={() => { props.history.push(`/article/${data._id}?${type}`) }} >
+        < div className='content-main' onClick={() => { props.history.push(`/article/${data.id}?${type}`) }} >
             <div className="header"  >
                 <img src={data.banner} alt='banner' />
                 {data.author ?

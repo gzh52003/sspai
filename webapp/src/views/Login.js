@@ -78,7 +78,7 @@ function Login(props) {
                         phone: account,
                         password
                     })
-                    console.log(data)
+                    console.log(66666666, data.data)
                     if (data.code) {
                         console.log(321)
                         dispatch({ type: "login", currentUser: data.data })
