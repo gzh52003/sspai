@@ -1,20 +1,22 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback } from 'react'
 
 import { List, InputItem, Button } from 'antd-mobile'
-import request from '../utils/request'
-import { connect } from 'react-redux'
-import { fetchData } from '../utils/tool'
+
+import request from '@/utils/request'
 import '../css/Login.scss'
 function Login(props) {
-    const login = useRef()
-    const phonenumber = useRef()
-    const password = useRef()
-    const mdl = useRef()
-    const vcode = useRef()
-    const code = useRef()
-    // useEffect(function () {
-    //     fetchData(code.current)
-    // }, [])
+    const login = useCallback(() => {
+        const userData = async () => {
+            const { data } = await request.get('/login', {
+                username: 'hxx',
+                password: 123456
+            })
+            console.log(props)
+            localStorage.setItem('currentUser', JSON.stringify(data))
+            props.history.push('/')
+        }
+        userData()
+    })
     return (
         <div className="pailog-form center-middle Login">
             <img className="title-img" src="img/common/icon-black.png" />
@@ -42,41 +44,13 @@ function Login(props) {
                             >注册</Button>
                             <Button size="small"
                                 style={{ background: "#f5f5f5", color: "#fd281a", margin: "0 10px", float: 'right' }}
-                                ref={login} onClick={async () => {
-                                    let user = {
-                                        phone: phonenumber.current.value,
-                                        password: password.current.value,
-                                        mdl: mdl.current.checked,
-                                    }
-                                    console.log(user)
-                                    async function tirgLogin() {
-                                        let result = await request.get('/login', {
-                                            ...user
-                                        })
-                                        // if (result.code == 1){
-                                        //     try {
-                                        //         localStorage.setItem('currentPhone',JSON.stringify(result.data)) || {}
-                                        //         localStorage.setItem('login',JSON.stringify({code:'ly'})) || {}
-                                        //         location.reload();
-                                        //     } catch(err){
-                                        //         console.error('用户信息有误')
-                                        //     }
-                                        // }
-                                    }
-                                    tirgLogin()
-                                }}
+                                onClick={login}
                             >登录</Button>
                         </>
                     }
                     multipleLine
                 >
-                    <span className="sp">
-                        <Button type="link" danger onClick={() => {
-                            props.history.push('/forget')
-                        }}>
-                            忘记密码？
-                        </Button>
-                    </span>
+                    <span className="sp">忘记密码？</span>
                 </List.Item>
             </List>
             <div className="divider"></div>
