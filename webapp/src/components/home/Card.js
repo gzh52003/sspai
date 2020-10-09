@@ -3,10 +3,11 @@ import { withRouter } from 'react-router-dom'
 
 function Card(props) {
     const data = props.data
+    const type = data.banner.split('/')[1]
     return (
-        < div className='content-main' onClick={() => { props.history.push(`/article/${data._id}`) }} >
+        < div className='content-main' onClick={() => { props.history.push(`/article/${data._id}?${type}`) }} >
             <div className="header"  >
-                <img src={data.banner} />
+                <img src={data.banner} alt='banner' />
                 {data.author ?
                     <p  >
                         <img src={data.author.avatar} />

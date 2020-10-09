@@ -23,23 +23,30 @@ function Header(props) {
             case 'logout':
                 localStorage.removeItem('currentUser')
                 dispatch({ type: 'showLog', show: false, })
-
+                props.history.push('/')
                 break
         }
     })
 
-    const [currentUser, setCurrentUser] = useStorage('currentUser')
+    //  通过hoc获取currentUser
+    // const [currentUser, setCurrentUser] = useStorage('currentUser')
+    // console.log("currentUser", currentUser)
 
-    console.log('State=1', state)
+    console.log('State=', state)
 
     useEffect(function () {
         if (props.currentUser) {
             dispatch({ type: 'showLog', show: true, })
-            console.log(231, state)
+            console.log("dispatch", state)
         }
-    }, [state.log])
+    }, [])
 
-    console.log("header", props)
+    // const a = function () {
+    //     if (props.currentUser) {
+    //         dispatch({ type: 'showLog', show: true, })
+    //         console.log("dispatch", state)
+    //     }
+    // }
     return (
         <NavBar
             mode="dark"
@@ -100,5 +107,7 @@ function Header(props) {
 }
 
 Header = withRouter(Header)
+
+//  通过高阶组件获取currentUser
 Header = withUser(Header)
 export default Header

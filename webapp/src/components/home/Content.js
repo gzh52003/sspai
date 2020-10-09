@@ -7,8 +7,9 @@ import { MyContext } from "@/store"
 import "@/css/Content.scss"
 import request from "@/utils/request"
 
-function Content(props) {
+function Content() {
     const { state, dispatch } = useContext(MyContext)
+    console.log(1111, state)
 
     //  初始化数据
     const [data, changedata] = useState([])
@@ -68,5 +69,5 @@ function Content(props) {
     )
 }
 
-Content = withRouter(Content)
+// Content = withRouter(Content)
 export default Content
