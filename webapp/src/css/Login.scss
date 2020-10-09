@@ -8,6 +8,17 @@ html, body{
     top: 50%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+    .am-input-label{
+        color: #c0c4cc;
+        font-size: 14px;
+    }
+    .am-list-item .am-list-line .am-list-extra{
+        flex-basis: 50%;
+        .am-button-small{
+            width: 30%;
+            padding: 0;
+        }
+    }
 }
 
 .pailog-form{
@@ -55,4 +66,5 @@ html, body{
         margin-top: 20px;
         margin-bottom: 20px;
     }
+    
 }

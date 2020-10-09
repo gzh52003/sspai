@@ -6,28 +6,16 @@ const token = require('../utils/token')
 
 //  登录
 router.get('/', async (req, res) => {
-    let { username, password, vcode, mdl } = req.query
-
-    //  从会话中获取验证码并交校验
-    console.log("vcode:", vcode, req.session)
-    if (vcode !== req.session.vcode) {
-        res.send(formatData({ code: 10 }))
-        return
-    }
-
+    let { phone, password } = req.query
 
 
     //  密码加密
     password = md5(password)
 
-    let result = await mongo.find('user', { username, password })
+    console.log(phone, password)
+    let result = await mongo.find('user', { phone, password })
     if (result.length > 0) {
-        let authorization
-        if (mdl === "true") {
-            authorization = token.create({ username }, "7d")
-        } else {
-            authorization = token.create({ username })
-        }
+        let authorization = token.create({ phone })
         result = result[0]
         result.authorization = authorization
         console.log(result)

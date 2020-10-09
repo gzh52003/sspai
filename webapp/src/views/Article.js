@@ -8,13 +8,14 @@ import '@/css/Article.scss'
 
 
 function Article(props) {
-    const { state, dispatch } = useContext(MyContext)
+    const type = props.location.search.slice(1)
+    // const { state, dispatch } = useContext(MyContext)
     const [data, changeData] = useState([])
     useEffect(() => {
         const { id } = props.match.params
         const getData = async () => {
-            let path = state.path.slice(0, state.path.lastIndexOf('?') == -1 ? state.path.length : state.path.lastIndexOf('?'))
-            const { data } = await request.get(`/${path}/${id}`)
+            // let path = state.path.slice(0, state.path.lastIndexOf('?') == -1 ? state.path.length : state.path.lastIndexOf('?'))
+            const { data } = await request.get(`/${type}/${id}`)
             changeData(data[0])
         }
         getData()

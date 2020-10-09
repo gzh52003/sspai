@@ -46,13 +46,14 @@ router.delete('/:id', async (req, res) => {
 // 修改数据
 router.put('/:id', async (req, res) => {
     const { id } = req.params
-    let { username, age, gender, phone, address, birthday } = req.body
-    // age = age.toString()
-    // phone = phone.toString()
-    let newData = { username, age, gender, phone, address, birthday }
+    let { age, gender, phone, address, birthday } = req.body
+    let { dynamic } = req.body
+
+    console.log(1111111, dynamic)
+    let newData = { age, gender, phone, address, birthday }
     try {
-        if (dynamics) {
-            await mongo.update('user', { _id: id }, { $addToSet: { dynamic: dynamics } })
+        if (dynamic) {
+            await mongo.update('user', { _id: id }, { $addToSet: { dynamic: dynamic } })
         } else {
             await mongo.update('user', { _id: id }, { $set: newData })
         }

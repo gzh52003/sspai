@@ -1,13 +1,14 @@
-const { Router, urlencoded, json} = require('express')
+const { Router, urlencoded, json } = require('express')
 const router = Router()
 const session = require('express-session')
 const token = require('../utils/token')
 const cors = require('../filter/cors')
-const {formatData} = require('../utils/tools')
+const { formatData } = require('../utils/tools')
 
 const vcodeRouter = require('./vcode')
 const userRouter = require('./user')
 const loginRouter = require('./login')
+const loginAppRouter = require('./loginApp')
 const regRouter = require('./reg')
 const recommendRouter = require('./recommend')
 const forgetRouter = require('./forget')
@@ -35,7 +36,7 @@ router.use(session({
 
 // 校验token
 router.get('/jwtverify', (req, res) => {
-    const {authorization} = req.query
+    const { authorization } = req.query
     if (token.verify(authorization)) {
         res.send(formatData())
     } else {
@@ -52,11 +53,14 @@ router.use('/user', userRouter)
 // 登录 /api/login
 router.use('/login', loginRouter)
 
+//  webapp登录 /api/loginApp
+router.use('/loginApp', loginAppRouter)
+
 // 注册 /api/reg
 router.use('/reg', regRouter)
 
 // 推荐 /api/reommend
-router.use('/recommend',recommendRouter)
+router.use('/recommend', recommendRouter)
 
 // 忘记密码 /api/forget
 router.use('/forget', forgetRouter)
