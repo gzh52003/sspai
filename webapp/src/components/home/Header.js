@@ -1,15 +1,18 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useContext, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import { NavBar, Icon, Button, Popover } from 'antd-mobile'
 
-import { withUser } from '@/utils/hoc.js'
+import { MyContext } from '@/store'
+import { withUser } from '@/utils/hoc'
+import { useStorage } from '@/utils/hooks'
 
 function Header(props) {
     const Item = Popover.Item
-    const [visibled, changeVisible] = useState(false)
-    const changeVisibled = useCallback((opt) => {
-        console.log(opt.props.value);
-        changeVisible(false)
+    // const [show, changeshow] = useState(false)
+    const { state, dispatch } = useContext(MyContext)
+
+    //  点击下拉菜单内容跳转到相对应的模块
+    const changeVisible = useCallback((opt) => {
         switch (opt.props.value) {
             case 'mine':
                 props.history.push('/mine');
@@ -19,31 +22,50 @@ function Header(props) {
                 break
             case 'logout':
                 localStorage.removeItem('currentUser')
-                props.history.push('/');
-
+                dispatch({ type: 'showLog', show: false, })
+                props.history.push('/')
                 break
         }
     })
 
-    console.log(props)
+    //  通过hoc获取currentUser
+    // const [currentUser, setCurrentUser] = useStorage('currentUser')
+    // console.log("currentUser", currentUser)
+
+
+
+    useEffect(function () {
+        if (props.currentUser) {
+            dispatch({ type: 'showLog', show: true, })
+            console.log("dispatch", state)
+        }
+    }, [])
+
+    // const a = function () {
+    //     if (props.currentUser) {
+    //         dispatch({ type: 'showLog', show: true, })
+    //         console.log("dispatch", state)
+    //     }
+    // }
     return (
         <NavBar
             mode="dark"
             leftContent={<img src="img/common/icon.png" onClick={() => { props.history.push("/") }} />}
             rightContent={[
                 <Icon key="0" type="search" />,
-                <span className="iconfont icon-gengduo" key="1"></span>,
+                <span className="iconfont icon-gengduo" key="1" onClick={() => { props.history.push('/series') }}></span>,
                 <React.Fragment key='null'>
                     {
-                        console.log(visibled)
+                        console.log('state.log', state.log)
                     }
                     {
-                        props.currentUser ?
+
+                        state.log ?
                             // <img src={props.currentUser.toppic} /> 
                             <Popover
                                 overlayClassName="fortest"
                                 overlayStyle={{ color: 'currentColor' }}
-                                visible={visibled}
+                                visible={false}
                                 overlay={[
                                     (<Item key="4" value="mine" >个人主页</Item>),
                                     (<Item key="5" value="special" >我的私信</Item>),
@@ -58,8 +80,8 @@ function Header(props) {
                                     overflow: { adjustY: 0, adjustX: 0 },
                                     offset: [-10, 0],
                                 }}
-                                // onVisibleChange={changeVisibled}
-                                onSelect={changeVisibled}
+                                // onVisibleChange={changeVisible}
+                                onSelect={changeVisible}
                             >
                                 <div style={{
                                     height: '100%',
@@ -70,11 +92,11 @@ function Header(props) {
 
                                 }}
                                 >
-                                    <img key='2422' src={props.currentUser.toppic} />
+                                    <img src={props.currentUser.toppic} />
                                 </div>
                             </Popover>
                             :
-                            <Button onClick={() => { props.history.push("/mine") }}>登录</Button>
+                            <Button onClick={() => { props.history.push("/login") }}>登录</Button>
                     }
 
                 </React.Fragment>
@@ -85,5 +107,7 @@ function Header(props) {
 }
 
 Header = withRouter(Header)
+
+//  通过高阶组件获取currentUser
 Header = withUser(Header)
 export default Header

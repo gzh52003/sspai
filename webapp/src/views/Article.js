@@ -1,25 +1,37 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
 
 import Header from '#/home/Header'           //  导航栏 
 import request from '@/utils/request'
 import { MyContext } from '@/store'
+import { withUser } from '@/utils/hoc'
 import '@/css/Article.scss'
 
 
 function Article(props) {
-    const { state, dispatch } = useContext(MyContext)
+    const type = props.location.search.slice(1)
+    // const { state, dispatch } = useContext(MyContext)
     const [data, changeData] = useState([])
     useEffect(() => {
         const { id } = props.match.params
+        console.log("id", id)
         const getData = async () => {
-            let path = state.path.slice(0, state.path.lastIndexOf('?') == -1 ? state.path.length : state.path.lastIndexOf('?'))
-            const { data } = await request.get(`/${path}/${id}`)
+            // let path = state.path.slice(0, state.path.lastIndexOf('?') == -1 ? state.path.length : state.path.lastIndexOf('?'))
+            // const { data } = await request.get(`/${type}/${id}`)
+            const { data } = await request.get(`/${type}/${id}`)
             changeData(data[0])
         }
         getData()
 
     }, [])
+    const like = useCallback(async function (data) {
+        const dynamic = { _id: data._id, id: data.id, title: data.title, banner: data.banner, avatar: data.author.avatar, nickname: data.author.nickname }
 
+        const { _id } = props.currentUser
+        console.log("123", _id)
+        await request.put(`/user/${_id}`, {
+            dynamic
+        })
+    }, [])
 
     return (
         <div className="article">
@@ -36,7 +48,7 @@ function Article(props) {
                 <img src={data.contentImg} />
                 <h3>{data.content}</h3>
                 <h4>© 本文著作权归作者所有，并授权少数派独家使用，未经少数派许可，不得转载使用。</h4>
-                <button className="btn">
+                <button className="btn" onClick={like.bind(null, data)} >
                     <span className="iconfont icon-iconset0216"></span>
                     {data.comment_count}
                 </button>
@@ -46,4 +58,4 @@ function Article(props) {
     )
 }
 
-export default Article
+export default withUser(Article)

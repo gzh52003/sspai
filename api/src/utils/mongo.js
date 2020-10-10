@@ -66,6 +66,7 @@ async function update(colName, query, newData) { // newData{$set:{price:200,qty:
 
     const collection = db.collection(colName)
 
+
     const result = await collection.updateMany(query, newData)
 
     client.close()
@@ -81,12 +82,16 @@ async function find(colName, query = {}, options = {}) {
     if (query._id && typeof query._id === 'string') {
         query._id = ObjectId(query._id)
     }
+    if (query.id && typeof query.id === 'string') {
+        query.id = Number(query.id)
+    }
 
     //  查询到数据集合
     const opt = {}
     if (options.field) {
         opt.projection = options.field
     }
+    console.log(query)
     let result = collection.find(query, opt)
 
     //  判断是否跳过数据

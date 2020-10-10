@@ -1,13 +1,33 @@
 import React, { useReducer } from 'react'
 
 const initState = {
-    path: 'recommend'
+    path: 'recommend',
+    log: false,
+    currentUser: {}
 }
 
 function reducer(state = initState, action) {
     switch (action.type) {
         case 'change':
-            return { path: action.path };
+            return {
+                ...state,
+                path: action.path
+            }
+            break;
+        case 'showLog':
+            return {
+                ...state,
+                log: action.show
+            }
+            break;
+        case 'login':
+            localStorage.setItem('currentUser', JSON.stringify(action.currentUser))
+            console.log('index', action.currentUser)
+            return {
+                ...state,
+                currentUser: action.currentUser
+            }
+            break;
         default:
             throw new Error('type error');
     }

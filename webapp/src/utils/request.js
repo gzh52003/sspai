@@ -7,7 +7,7 @@ import { Toast } from 'antd-mobile'
 
 
 const request = axios.create({
-    baseURL: 'http://120.78.186.169:3002/api',
+    baseURL: 'http://localhost:3002/api',
     withCredentials: true
 })
 

@@ -55,6 +55,7 @@
         .am-tabs-pane-wrap{
             text-align: left;
             padding: 2%;
+            background-color: rgb(245, 245, 249);
         h2,h3{
                 margin: 0;
                 background-color: #fff;
@@ -91,6 +92,41 @@
                     }
 
                 }
+            }
+            .content-main{
+                width: 100%;
+            }
+            h4{
+                margin: 0;
+                background-color: #fff;
+                padding: 20px 16px;
+                height: 60px;
+                text-align: center;
+                color: #292525;
+                font-size: 14px;
+                font-weight: normal;
+                margin-top: 8px;
+                margin-bottom: 20px;
+            }
+        }
+        .mine_card_top{
+            display: flex;
+            align-items: center;
+            margin: 20px 0 12px;
+            img{
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+            }
+            span{
+                color: #292525;
+                margin: 0 8px;
+                font-size: 12px;
+            }
+            b{
+                font-weight: normal;
+                color: #8e8787;
+                font-size: 12px;
             }
         }
     }

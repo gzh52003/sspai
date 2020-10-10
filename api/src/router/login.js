@@ -7,14 +7,16 @@ const token = require('../utils/token')
 //  登录
 router.get('/', async (req, res) => {
     let { username, password, vcode, mdl } = req.query
-    
-        //  从会话中获取验证码并交校验
-        console.log("vcode:", vcode, req.session)
-        if (vcode !== req.session.vcode) {
-            res.send(formatData({ code: 10 }))
-            return
-        }
-    
+
+    //  从会话中获取验证码并交校验
+    console.log("vcode:", vcode, req.session)
+    if (vcode !== req.session.vcode) {
+        res.send(formatData({ code: 10 }))
+        return
+    }
+
+
+
     //  密码加密
     password = md5(password)
 

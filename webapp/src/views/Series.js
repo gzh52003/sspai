@@ -1,12 +1,18 @@
 import React from 'react'
-import {Card} from 'antd-mobile'
+import {Card, Tabs, WhiteSpace} from 'antd-mobile'
 
 import '../css/Series.scss'
 
 import Header from '#/home/Header'                // 导航栏
 import Swiper from '#/series/Swiper'               // 轮播图
+import Carousels from '#/series/Carousels'         // 滑块
 
-function Series(){
+
+function Series(props){
+    const tabs = [
+        { title: 'First Tab', sub: '1' },
+        { title: 'Second Tab', sub: '2' },
+      ];
     return(
         <div className="Series">
             <Header />
@@ -21,6 +27,34 @@ function Series(){
                 </p>
                 </Card.Body>
             </Card>
+
+            <div className="content">
+                <WhiteSpace />
+                <Tabs tabs={tabs} 
+                    renderTabBar={props => <Tabs.DefaultTabBar {...props} page={2} />}
+                    initialPage={0} 
+                    tabBarBackgroundColor={"#f4f4f4"}
+                    tabBarActiveTextColor={'#fd281a'}
+                    tabBarInactiveTextColor={'#8e8787'}
+                    animated={false}
+                    swipeable={false}
+                    tabBarUnderlineStyle={{border: '1px #fd281a solid', width: '20%'}}
+                    
+                >
+                    <div className="whole" style={{  height: '100%', backgroundColor: '#fff' }} >
+                        <div className="newest">最新上架
+                            <Carousels />
+
+                        </div>
+                         <div className="mine">精选试读
+
+                        </div>
+                    </div>
+                </Tabs>
+                 <WhiteSpace />
+
+            </div>
+
              <footer>
                 <div className="footer-logo">
                     <img src='img/common/icon.png' />

@@ -14,3 +14,4 @@ export const mineTabs = [
     { title: '收藏', sub: 'collection' },
     { title: '关注', sub: 'focus' },
 ]
+

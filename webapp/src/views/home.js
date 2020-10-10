@@ -8,8 +8,9 @@ import Swiper from '#/home/Swiper'           //  轮播图
 import Carousels from '#/home/Carousels'     //  右划卡片
 import Content from "#/home/Content"         //  模块内容
 import { tabsData } from '@/store/common'    //  标签页表头
+import Footer from '#/home/Footer'           //  页尾
 import { MyContext } from '@/store'
-
+ 
 function Home(props) {
 
     const [Tabs_tab, changetab] = useState(tabsData)
@@ -72,30 +73,9 @@ function Home(props) {
                     </div>
                 }
             </div>
-            <footer>
-                <div className="footer-logo">
-                    <img src='img/common/icon.png' />
-                </div>
-                <p>
-                    <span className="iconfont icon-weibo"></span>
-                    <span className="iconfont icon-weixin"></span>
-                    <span className="iconfont icon-tuite"></span>
-                    <span className="iconfont icon-WiFi"></span>
-                </p>
-                <h2>
-                    <span>下载App</span>
-                    <span>联系我们</span>
-                    <span>商务合作</span>
-                    <span>成为作者</span>
-                    <span>关于我们</span>
-                    <span>用户协议</span>
-                    <span>常见问题</span>
-                </h2>
-                <h3>
-                    <p>© 2013-2020 少数派</p>
-                    <p>粤ICP备09128966号-4 | CC BY-NC 4.0</p>
-                </h3>
-            </footer>
+            <Footer>
+
+            </Footer>
         </div >
     )
 }

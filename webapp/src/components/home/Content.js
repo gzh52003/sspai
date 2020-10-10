@@ -2,12 +2,14 @@
 import React, { useState, useEffect, useCallback, useContext } from "react"
 import { withRouter } from 'react-router-dom'
 
+import Card from '#/home/Card'
 import { MyContext } from "@/store"
 import "@/css/Content.scss"
 import request from "@/utils/request"
 
-function Content(props) {
+function Content() {
     const { state, dispatch } = useContext(MyContext)
+    console.log(1111, state)
 
     //  初始化数据
     const [data, changedata] = useState([])
@@ -56,24 +58,7 @@ function Content(props) {
                                 <button>阅读全篇</button>
                             </div>
                             :
-                            < div className='content-main' onClick={() => { props.history.push(`/article/${item._id}`) }} >
-                                <div className="header"  >
-                                    <img src={item.banner} />
-                                    {item.author ?
-                                        <p  >
-                                            <img src={item.author.avatar} />
-                                            <span>{item.author.nickname}</span>
-                                        </p>
-                                        : ''
-                                    }
-                                    {item.corner && item.corner.icon ?
-                                        <h2><img src={item.corner.icon} /></h2> : ''
-                                    }
-                                </div>
-                                <div className="title"  >
-                                    {item.title}
-                                </div>
-                            </div>
+                            <Card data={item}></Card>
                         }
                     </React.Fragment>
                 )
@@ -84,5 +69,5 @@ function Content(props) {
     )
 }
 
-Content = withRouter(Content)
+// Content = withRouter(Content)
 export default Content
