@@ -38,7 +38,7 @@ function Series(props){
                     tabBarInactiveTextColor={'#8e8787'}
                     animated={false}
                     swipeable={false}
-                    tabBarUnderlineStyle={{border: '1px #fd281a solid', width: '20%'}}
+                    tabBarUnderlineStyle={{border: '1px #fd281a solid', width: '20%',margin: '0 auto'}}
                     
                 >
                     <div className="whole" style={{  height: '100%', backgroundColor: '#fff' }} >
@@ -50,6 +50,7 @@ function Series(props){
 
                         </div>
                     </div>
+                    <div className="whole" style={{width: '100%', height: '100px', backgroundColor: '#fff' }} ></div>
                 </Tabs>
                  <WhiteSpace />
 
