@@ -32,7 +32,7 @@ function Header(props) {
     // const [currentUser, setCurrentUser] = useStorage('currentUser')
     // console.log("currentUser", currentUser)
 
-    console.log('State=', state)
+
 
     useEffect(function () {
         if (props.currentUser) {
@@ -53,7 +53,7 @@ function Header(props) {
             leftContent={<img src="img/common/icon.png" onClick={() => { props.history.push("/") }} />}
             rightContent={[
                 <Icon key="0" type="search" />,
-                <span className="iconfont icon-gengduo" key="1"></span>,
+                <span className="iconfont icon-gengduo" key="1" onClick={() => { props.history.push('/series') }}></span>,
                 <React.Fragment key='null'>
                     {
                         console.log('state.log', state.log)

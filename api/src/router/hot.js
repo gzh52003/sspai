@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
 // 查询某个商品
 router.get('/:id', async (req, res) => {
     const { id } = req.params
-    const result = await mongo.find('hot', { _id: id })
+    const result = await mongo.find('hot', { id })
     res.send(formatData({ data: result }))
 })
 
@@ -45,8 +45,8 @@ router.delete('/:id', async (req, res) => {
 
 // 增加商品
 router.post('/', async (req, res) => {
-    let {banner, title, summary, content, contentImg, author} = req.body  // author为对象,传递值也应该为对象
-    let newData = {banner, title, summary, content, contentImg, author}
+    let { banner, title, summary, content, contentImg, author } = req.body  // author为对象,传递值也应该为对象
+    let newData = { banner, title, summary, content, contentImg, author }
 
     try {
         const result = await mongo.insert('hot', newData)
@@ -58,15 +58,15 @@ router.post('/', async (req, res) => {
 
 // 修改商品
 router.put('/:id', async (req, res) => {
-    const {id} = req.params
-    let {banner, title, summary, content, contentImg, author} = req.body  // author为对象,传递值也应该为对象
-    let newData = {banner, title, summary, content, contentImg, author}
+    const { id } = req.params
+    let { banner, title, summary, content, contentImg, author } = req.body  // author为对象,传递值也应该为对象
+    let newData = { banner, title, summary, content, contentImg, author }
 
     try {
-        await mongo.update('hot', {_id: id}, {$set: newData})
-        res.send(formatData({data: {_id: id, ...newData}}))
-    } catch (err){
-        res.send(formatData({code: 0}))
+        await mongo.update('hot', { _id: id }, { $set: newData })
+        res.send(formatData({ data: { _id: id, ...newData } }))
+    } catch (err) {
+        res.send(formatData({ code: 0 }))
     }
 })
 

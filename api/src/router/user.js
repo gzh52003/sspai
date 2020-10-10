@@ -49,7 +49,6 @@ router.put('/:id', async (req, res) => {
     let { age, gender, phone, address, birthday } = req.body
     let { dynamic } = req.body
 
-    console.log(1111111, dynamic)
     let newData = { age, gender, phone, address, birthday }
     try {
         if (dynamic) {
@@ -68,7 +67,6 @@ router.put('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     let { username, password, gender, age } = req.body
     password = md5(password)
-    console.log(username, password)
     // age = age.toString()
     try {
         const result = await mongo.insert('user', { username, password, gender, age })
