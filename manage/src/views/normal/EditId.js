@@ -3,9 +3,6 @@ import { SmileOutlined,UploadOutlined } from '@ant-design/icons';
 import { Form, Input, DatePicker, TimePicker, Select, Cascader, InputNumber,Upload ,Button} from 'antd';
 import request from '../../utils/request';
 import {MyContext} from '../../myContext'
-const initState = {
-
-}
 const { Option } = Select;
 const normFile = e => {
     console.log('Upload event:', e);
@@ -24,34 +21,54 @@ const formItemLayout = {
     sm: { span: 12 },
   },
 };
-const onFinish = values => {
-    console.log('Received values of form: ', values);
-  };
+
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
 function EditId(props){
     console.log(111,props)
-    const {state,dispatch} = useContext(MyContext);
-    console.log(dispatch,'6+6')
+    const onFinish = values => {
+        if(values.birthday){
+            let d=new Date(values.birthday._d);
+            let str = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+            values.birthday = str;
+        }
+
+        // if(values.birthday){
+        //     values.birthday =values.birthday.substr( 0,values.birthday.indexOf('T'))
+        // }
+        const putData = async ()=>{
+          await  request.put('/user/'+props.match.params.id,{
+               ...values,
+            })
+        }
+        putData();
+      };
+    const [state, changeState] = useState()
     useEffect(()=>{
         let id =  props.match.params.id;
-        const getData =async (dispatch)=>{
-            let data = await request.get('/user/'+id).then(data=>{if(data){
-                let now = data.data[0];
-                dispatch({type:'initeditID',editID:now})
-            }}) 
-        }
-        getData(dispatch);
+        const userData = async () => {
+            const { data } = await request.get(`/user/${id}`)
+            console.log(2222, data[0])
+            console.log(789, state)
+            if (state) {
+              console.log(1234)
+              state.setFieldsValue(
+                { username: data[0].username,address:data[0].address,gender:data[0].gender,age:data[0].age,phone:data[0].phone}
+              )
+              console.log(1234, data[0].username)
+            }
+          }
+          userData()
 
-    },[props.match.params.id])
-    console.log(state.editID.username)
+    },[state])
    return(
          <Form {...formItemLayout}
          onFinish={onFinish}
          onFinishFailed={onFinishFailed}
-     
-         initialValues={{['username']:state.editID.username}}
+         ref={(el) => {
+            changeState(el)
+          }}
          >
          <Form.Item
       label="用户名"
@@ -84,6 +101,13 @@ function EditId(props){
       name="age"
     >
       <Input placeholder="你的年龄" id="age" />
+    </Form.Item>
+    <Form.Item
+      label="手机号"
+      help="输入你的手机号"
+      name="phone"
+    >
+      <Input placeholder="你的手机号" id="age" />
     </Form.Item>
       <Form.Item
         label="生日"

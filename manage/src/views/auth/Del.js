@@ -1,5 +1,10 @@
-import React from 'react';
+import React,{useCallback,useEffect,useState} from 'react';
+
+
 function Del(){
-    return <div>Del</div>
+ const [state,changestate] = useState({n:10})
+    return <div onClick={()=>{
+        console.log(state)
+    }}>Del{state.n}</div>
 }
 export default Del;
